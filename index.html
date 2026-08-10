@@ -78,8 +78,8 @@
                     </li>
 
                     <li class="nav-item ms-lg-3">
-                        <a href="#contact" class="btn btn-cfol">
-                            Register Now
+                        <a href="#register" class="btn btn-cfol">
+                       Register Now
                         </a>
                     </li>
 
@@ -362,7 +362,269 @@ Excellence • Integrity • Innovation • Learning
     </div>
 </section>
 
+<section id="register" class="register-section">
 
+    <div class="container">
+
+        <div class="register-container">
+
+            <div class="register-header">
+                <span class="register-badge">
+                    CFOL TECHNOLOGIES
+                </span>
+
+                <h2>Create Your Account</h2>
+
+                <p>
+                    Join CFOL Technologies and start your technology
+                    learning journey.
+                </p>
+            </div>
+
+
+            <!-- Account Type -->
+
+            <div class="account-type">
+
+                <button
+                    type="button"
+                    class="account-type-btn active"
+                    data-role="student">
+
+                    🎓 Student
+
+                </button>
+
+                <button
+                    type="button"
+                    class="account-type-btn"
+                    data-role="lecturer">
+
+                    👨‍🏫 Lecturer
+
+                </button>
+
+            </div>
+
+
+            <!-- Registration Form -->
+
+            <form id="registrationForm">
+
+                <input type="hidden"
+                       id="userRole"
+                       value="student">
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="firstName">
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="firstName"
+                            required
+                            placeholder="Enter first name">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="lastName">
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="lastName"
+                            required
+                            placeholder="Enter last name">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        required
+                        placeholder="Enter your email">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        required
+                        placeholder="08012345678">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        required
+                        minlength="8"
+                        placeholder="Minimum 8 characters">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        required
+                        placeholder="Confirm your password">
+
+                </div>
+
+
+                <!-- Student Information -->
+
+                <div id="studentFields">
+
+                    <div class="form-group">
+
+                        <label for="course">
+                            Course of Interest
+                        </label>
+
+                        <select id="course">
+
+                            <option value="">
+                                Select a course
+                            </option>
+
+                            <option>
+                                Software Quality Assurance
+                            </option>
+
+                            <option>
+                                Software Testing
+                            </option>
+
+                            <option>
+                                Test Automation
+                            </option>
+
+                            <option>
+                                Programming
+                            </option>
+
+                            <option>
+                                Artificial Intelligence
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Lecturer Information -->
+
+                <div id="lecturerFields" style="display:none;">
+
+                    <div class="form-group">
+
+                        <label for="expertise">
+                            Area of Expertise
+                        </label>
+
+                        <input
+                            type="text"
+                            id="expertise"
+                            placeholder="e.g. Software Testing">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="qualification">
+                            Highest Qualification
+                        </label>
+
+                        <input
+                            type="text"
+                            id="qualification"
+                            placeholder="e.g. BSc Computer Science">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="experience">
+                            Years of Experience
+                        </label>
+
+                        <input
+                            type="number"
+                            id="experience"
+                            min="0"
+                            placeholder="e.g. 5">
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-cfol register-submit"
+                    id="registerSubmit">
+
+                    Create Account
+
+                </button>
+
+
+                <div
+                    id="registrationMessage"
+                    class="registration-message">
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
 
 <section id="contact">
 
@@ -396,6 +658,8 @@ Excellence • Integrity • Innovation • Learning
 <!-- Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <!-- CFOL Custom JavaScript -->
 <script src="script.js"></script>
 </body>

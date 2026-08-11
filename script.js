@@ -29,15 +29,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
     anchor.addEventListener("click", function (e) {
 
-        e.preventDefault();
+        const targetId = this.getAttribute("href");
+
+        if (!targetId || targetId === "#") {
+            return;
+        }
 
         const target =
-            document.querySelector(this.getAttribute("href"));
+            document.querySelector(targetId);
 
         if (target) {
 
+            e.preventDefault();
+
             target.scrollIntoView({
-                behavior: "smooth"
+                behavior: "smooth",
+                block: "start"
             });
 
         }
@@ -53,7 +60,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 window.addEventListener("load", () => {
 
-    console.log("Welcome to CFOL Technologies");
+    console.log(
+        "Welcome to CFOL Technologies"
+    );
 
 });
 
@@ -62,648 +71,885 @@ window.addEventListener("load", () => {
    CONTACT BUTTON
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-    const messageBtn =
-        document.getElementById("messageBtn");
+        const messageBtn =
+            document.getElementById("messageBtn");
 
-    if (messageBtn) {
+        if (messageBtn) {
 
-        messageBtn.addEventListener("click", () => {
+            messageBtn.addEventListener(
+                "click",
+                () => {
 
-            alert(
-                "Thank you for your interest in CFOL Technologies."
+                    alert(
+                        "Thank you for your interest in CFOL Technologies."
+                    );
+
+                }
             );
-
-        });
-
-    }
-
-});
-
-
-/* =========================================================
-   REVEAL ANIMATION
-========================================================= */
-
-const cards =
-    document.querySelectorAll(".card, .course");
-
-cards.forEach(card => {
-
-    card.style.opacity = 0;
-
-    card.style.transform =
-        "translateY(40px)";
-
-    card.style.transition =
-        "all .6s ease";
-
-});
-
-
-window.addEventListener("scroll", () => {
-
-    cards.forEach(card => {
-
-        const top =
-            card.getBoundingClientRect().top;
-
-        if (top < window.innerHeight - 100) {
-
-            card.style.opacity = 1;
-
-            card.style.transform =
-                "translateY(0)";
 
         }
 
-    });
+    }
+);
 
-});
+
+/* =========================================================
+   CARD / COURSE REVEAL ANIMATION
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const cards =
+            document.querySelectorAll(
+                ".card, .course"
+            );
+
+        cards.forEach(card => {
+
+            card.style.opacity = "0";
+
+            card.style.transform =
+                "translateY(40px)";
+
+            card.style.transition =
+                "all .6s ease";
+
+        });
+
+
+        function revealCards() {
+
+            cards.forEach(card => {
+
+                const top =
+                    card.getBoundingClientRect().top;
+
+                if (
+                    top <
+                    window.innerHeight - 100
+                ) {
+
+                    card.style.opacity = "1";
+
+                    card.style.transform =
+                        "translateY(0)";
+
+                }
+
+            });
+
+        }
+
+
+        window.addEventListener(
+            "scroll",
+            revealCards
+        );
+
+        revealCards();
+
+    }
+);
 
 
 /* =========================================================
    MOBILE NAVIGATION
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-    const navbar =
-        document.getElementById("mainNavbar");
+        const navbar =
+            document.getElementById(
+                "mainNavbar"
+            );
 
-    const navLinks =
-        document.querySelectorAll(
-            "#mainNavbar .nav-link, #mainNavbar .btn-cfol"
-        );
-
-
-    if (!navbar) {
-        return;
-    }
+        if (!navbar) {
+            return;
+        }
 
 
-    navLinks.forEach(function (link) {
-
-        link.addEventListener("click", function (event) {
-
-            const targetId =
-                this.getAttribute("href");
-
-
-            if (!targetId ||
-                !targetId.startsWith("#")) {
-
-                return;
-
-            }
+        const navLinks =
+            document.querySelectorAll(
+                "#mainNavbar .nav-link, " +
+                "#mainNavbar .btn-cfol"
+            );
 
 
-            const targetSection =
-                document.querySelector(targetId);
+        navLinks.forEach(function (link) {
+
+            link.addEventListener(
+                "click",
+                function (event) {
+
+                    const targetId =
+                        this.getAttribute("href");
 
 
-            if (!targetSection) {
-                return;
-            }
+                    if (
+                        !targetId ||
+                        !targetId.startsWith("#")
+                    ) {
+
+                        return;
+
+                    }
 
 
-            event.preventDefault();
+                    const targetSection =
+                        document.querySelector(
+                            targetId
+                        );
 
 
-            const isMobile =
-                window.innerWidth < 992;
-
-            const isMenuOpen =
-                navbar.classList.contains("show");
+                    if (!targetSection) {
+                        return;
+                    }
 
 
-            if (isMobile && isMenuOpen) {
-
-                const bsCollapse =
-                    bootstrap.Collapse
-                        .getOrCreateInstance(navbar);
-
-                bsCollapse.hide();
+                    event.preventDefault();
 
 
-                setTimeout(function () {
-
-                    targetSection.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-
-                }, 300);
+                    const isMobile =
+                        window.innerWidth < 992;
 
 
-            } else {
+                    const isMenuOpen =
+                        navbar.classList.contains(
+                            "show"
+                        );
 
-                targetSection.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
 
-            }
+                    if (
+                        isMobile &&
+                        isMenuOpen &&
+                        typeof bootstrap !== "undefined"
+                    ) {
+
+                        const bsCollapse =
+                            bootstrap.Collapse
+                                .getOrCreateInstance(
+                                    navbar
+                                );
+
+                        bsCollapse.hide();
+
+
+                        setTimeout(
+                            function () {
+
+                                targetSection.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "start"
+                                });
+
+                            },
+                            300
+                        );
+
+                    } else {
+
+                        targetSection.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+
+                }
+            );
 
         });
 
-    });
-
-});
+    }
+);
 
 
 /* =========================================================
    CFOL REGISTRATION
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-    const form =
-        document.getElementById("registrationForm");
-
-
-    /*
-       Registration section may not exist
-       on the homepage.
-    */
-
-    if (!form) {
-        return;
-    }
+        const form =
+            document.getElementById(
+                "registrationForm"
+            );
 
 
-    const roleInput =
-        document.getElementById("userRole");
+        /*
+         * Stop if registration form
+         * does not exist on the page.
+         */
 
-    const studentFields =
-        document.getElementById("studentFields");
-
-    const lecturerFields =
-        document.getElementById("lecturerFields");
-
-    const message =
-        document.getElementById("registrationMessage");
-
-    const submitButton =
-        document.getElementById("registerSubmit");
+        if (!form) {
+            return;
+        }
 
 
-    /* =====================================================
-       STUDENT / LECTURER SELECTION
-    ===================================================== */
+        /* =====================================================
+           GET FORM ELEMENTS
+        ===================================================== */
 
-    const roleButtons =
-        document.querySelectorAll(
-            ".account-type-btn"
+        const roleInput =
+            document.getElementById(
+                "userRole"
+            );
+
+
+        const studentFields =
+            document.getElementById(
+                "studentFields"
+            );
+
+
+        const lecturerFields =
+            document.getElementById(
+                "lecturerFields"
+            );
+
+
+        const message =
+            document.getElementById(
+                "registrationMessage"
+            );
+
+
+        const submitButton =
+            document.getElementById(
+                "registerSubmit"
+            );
+
+
+        /* =====================================================
+           ROLE BUTTONS
+        ===================================================== */
+
+        const roleButtons =
+            document.querySelectorAll(
+                ".account-type-btn"
+            );
+
+
+        /* =====================================================
+           STUDENT / LECTURER SELECTION
+        ===================================================== */
+
+        roleButtons.forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+
+                        /*
+                         * Remove active class
+                         * from all buttons.
+                         */
+
+                        roleButtons.forEach(
+                            function (btn) {
+
+                                btn.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        /*
+                         * Activate selected button.
+                         */
+
+                        this.classList.add(
+                            "active"
+                        );
+
+
+                        /*
+                         * Get selected role.
+                         */
+
+                        const role =
+                            this.dataset.role;
+
+
+                        roleInput.value =
+                            role;
+
+
+                        /*
+                         * Student selected.
+                         */
+
+                        if (
+                            role === "student"
+                        ) {
+
+                            studentFields.style.display =
+                                "block";
+
+                            lecturerFields.style.display =
+                                "none";
+
+
+                            /*
+                             * Make course required.
+                             */
+
+                            document.getElementById(
+                                "course"
+                            ).required = true;
+
+
+                            /*
+                             * Lecturer fields
+                             * are not required.
+                             */
+
+                            document.getElementById(
+                                "expertise"
+                            ).required = false;
+
+                            document.getElementById(
+                                "qualification"
+                            ).required = false;
+
+                            document.getElementById(
+                                "experience"
+                            ).required = false;
+
+                        }
+
+
+                        /*
+                         * Lecturer selected.
+                         */
+
+                        else {
+
+                            studentFields.style.display =
+                                "none";
+
+                            lecturerFields.style.display =
+                                "block";
+
+
+                            /*
+                             * Course is no longer
+                             * required.
+                             */
+
+                            document.getElementById(
+                                "course"
+                            ).required = false;
+
+
+                            /*
+                             * Lecturer fields
+                             * become required.
+                             */
+
+                            document.getElementById(
+                                "expertise"
+                            ).required = true;
+
+                            document.getElementById(
+                                "qualification"
+                            ).required = true;
+
+                            document.getElementById(
+                                "experience"
+                            ).required = true;
+
+                        }
+
+                    }
+                );
+
+            }
         );
 
 
-    roleButtons.forEach(function (button) {
+        /* =====================================================
+           REGISTRATION SUBMISSION
+        ===================================================== */
 
-        button.addEventListener(
-            "click",
-            function () {
+        form.addEventListener(
+            "submit",
+            async function (event) {
 
-
-                /*
-                   Remove active class
-                   from all buttons
-                */
-
-                roleButtons.forEach(function (btn) {
-
-                    btn.classList.remove("active");
-
-                });
+                event.preventDefault();
 
 
                 /*
-                   Activate selected button
-                */
+                 * Clear previous message.
+                 */
 
-                this.classList.add("active");
+                message.textContent = "";
+
+                message.style.color = "";
 
 
-                /*
-                   Get selected role
-                */
+                /* =================================================
+                   GET BASIC INFORMATION
+                ================================================= */
+
+                const firstName =
+                    document.getElementById(
+                        "firstName"
+                    ).value.trim();
+
+
+                const lastName =
+                    document.getElementById(
+                        "lastName"
+                    ).value.trim();
+
+
+                const email =
+                    document.getElementById(
+                        "email"
+                    ).value.trim();
+
+
+                const phone =
+                    document.getElementById(
+                        "phone"
+                    ).value.trim();
+
+
+                const password =
+                    document.getElementById(
+                        "password"
+                    ).value;
+
+
+                const confirmPassword =
+                    document.getElementById(
+                        "confirmPassword"
+                    ).value;
+
 
                 const role =
-                    this.dataset.role;
+                    roleInput.value;
 
 
-                roleInput.value =
-                    role;
+                /* =================================================
+                   GET STUDENT / LECTURER INFORMATION
+                ================================================= */
 
+                const course =
+                    document.getElementById(
+                        "course"
+                    ).value.trim();
 
-                /*
-                   Show appropriate fields
-                */
 
-                if (role === "student") {
+                const expertise =
+                    document.getElementById(
+                        "expertise"
+                    ).value.trim();
 
-                    if (studentFields) {
-                        studentFields.style.display =
-                            "block";
-                    }
 
-                    if (lecturerFields) {
-                        lecturerFields.style.display =
-                            "none";
-                    }
+                const qualification =
+                    document.getElementById(
+                        "qualification"
+                    ).value.trim();
 
 
-                } else {
+                const experienceValue =
+                    document.getElementById(
+                        "experience"
+                    ).value.trim();
 
-                    if (studentFields) {
-                        studentFields.style.display =
-                            "none";
-                    }
 
-                    if (lecturerFields) {
-                        lecturerFields.style.display =
-                            "block";
-                    }
+                /* =================================================
+                   VALIDATION
+                ================================================= */
 
-                }
-
-            }
-        );
-
-    });
-
-
-    /* =====================================================
-       REGISTRATION SUBMISSION
-    ===================================================== */
-
-    form.addEventListener(
-        "submit",
-        async function (event) {
-
-            event.preventDefault();
-
-
-            /*
-               Clear previous message
-            */
-
-            message.textContent = "";
-
-
-            /* =================================================
-               COMMON FIELDS
-            ================================================= */
-
-            const firstName =
-                document.getElementById("firstName")
-                    .value.trim();
-
-
-            const lastName =
-                document.getElementById("lastName")
-                    .value.trim();
-
-
-            const email =
-                document.getElementById("email")
-                    .value.trim();
-
-
-            const phone =
-                document.getElementById("phone")
-                    .value.trim();
-
-
-            const password =
-                document.getElementById("password")
-                    .value;
-
-
-            const confirmPassword =
-                document.getElementById("confirmPassword")
-                    .value;
-
-
-            const role =
-                roleInput.value;
-
-
-            /* =================================================
-               STUDENT COURSE
-            ================================================= */
-
-            const courseElement =
-                document.getElementById("course");
-
-
-            const course =
-                courseElement
-                    ? courseElement.value.trim()
-                    : "";
-
-
-            /* =================================================
-               LECTURER INFORMATION
-            ================================================= */
-
-            const expertiseElement =
-                document.getElementById("expertise");
-
-
-            const qualificationElement =
-                document.getElementById("qualification");
-
-
-            const experienceElement =
-                document.getElementById("experience");
-
-
-            const expertise =
-                expertiseElement
-                    ? expertiseElement.value.trim()
-                    : "";
-
-
-            const qualification =
-                qualificationElement
-                    ? qualificationElement.value.trim()
-                    : "";
-
-
-            const experience =
-                experienceElement
-                    ? experienceElement.value.trim()
-                    : "";
-
-
-            /* =================================================
-               BASIC VALIDATION
-            ================================================= */
-
-            if (!firstName ||
-                !lastName ||
-                !email ||
-                !phone) {
-
-                message.textContent =
-                    "Please complete all required fields.";
-
-                return;
-
-            }
-
-
-            /* =================================================
-               PASSWORD VALIDATION
-            ================================================= */
-
-            if (password.length < 8) {
-
-                message.textContent =
-                    "Password must contain at least 8 characters.";
-
-                return;
-
-            }
-
-
-            if (password !== confirmPassword) {
-
-                message.textContent =
-                    "Passwords do not match.";
-
-                return;
-
-            }
-
-
-            /* =================================================
-               STUDENT VALIDATION
-            ================================================= */
-
-            if (role === "student" && !course) {
-
-                message.textContent =
-                    "Please select your course.";
-
-                return;
-
-            }
-
-
-            /* =================================================
-               LECTURER VALIDATION
-            ================================================= */
-
-            if (role === "lecturer") {
-
-                if (!expertise ||
-                    !qualification ||
-                    !experience) {
+                if (!firstName || !lastName) {
 
                     message.textContent =
-                        "Please complete your expertise, qualification and experience.";
+                        "Please enter your first and last name.";
 
                     return;
 
                 }
 
-            }
+
+                if (!phone) {
+
+                    message.textContent =
+                        "Please enter your phone number.";
+
+                    return;
+
+                }
 
 
-            /* =================================================
-               DISABLE SUBMIT BUTTON
-            ================================================= */
+                if (!role) {
 
-            submitButton.disabled = true;
+                    message.textContent =
+                        "Please select Student or Lecturer.";
 
-            submitButton.textContent =
-                "Creating Account...";
+                    return;
 
-
-            try {
+                }
 
 
-                /* =============================================
-                   CREATE SUPABASE AUTH ACCOUNT
-                ============================================= */
+                if (password.length < 8) {
 
-                const { data, error } =
-                    await supabaseClient.auth.signUp({
+                    message.textContent =
+                        "Password must contain at least 8 characters.";
 
-                        email: email,
+                    return;
 
-                        password: password,
-
-                        options: {
-
-                            emailRedirectTo:
-                                "https://cfoltech.com.ng/",
-
-                            data: {
-
-                                /*
-                                   COMMON INFORMATION
-                                */
-
-                                first_name:
-                                    firstName,
-
-                                last_name:
-                                    lastName,
-
-                                phone:
-                                    phone,
-
-                                role:
-                                    role,
+                }
 
 
-                                /*
-                                   STUDENT INFORMATION
-                                */
+                if (
+                    password !==
+                    confirmPassword
+                ) {
 
-                                course:
-                                    role === "student"
-                                        ? course
-                                        : null,
+                    message.textContent =
+                        "Passwords do not match.";
+
+                    return;
+
+                }
 
 
-                                /*
-                                   LECTURER INFORMATION
-                                */
+                /* =================================================
+                   STUDENT VALIDATION
+                ================================================= */
 
-                                expertise:
-                                    role === "lecturer"
-                                        ? expertise
-                                        : null,
+                if (
+                    role === "student" &&
+                    !course
+                ) {
 
-                                qualification:
-                                    role === "lecturer"
-                                        ? qualification
-                                        : null,
+                    message.textContent =
+                        "Please select your course of interest.";
 
-                                experience:
-                                    role === "lecturer"
-                                        ? experience
-                                        : null
+                    return;
+
+                }
+
+
+                /* =================================================
+                   LECTURER VALIDATION
+                ================================================= */
+
+                if (
+                    role === "lecturer"
+                ) {
+
+                    if (!expertise) {
+
+                        message.textContent =
+                            "Please enter your area of expertise.";
+
+                        return;
+
+                    }
+
+
+                    if (!qualification) {
+
+                        message.textContent =
+                            "Please enter your highest qualification.";
+
+                        return;
+
+                    }
+
+
+                    if (!experienceValue) {
+
+                        message.textContent =
+                            "Please enter your years of experience.";
+
+                        return;
+
+                    }
+
+
+                    if (
+                        isNaN(
+                            Number(
+                                experienceValue
+                            )
+                        )
+                    ) {
+
+                        message.textContent =
+                            "Years of experience must be a number.";
+
+                        return;
+
+                    }
+
+                }
+
+
+                /* =================================================
+                   DISABLE BUTTON
+                ================================================= */
+
+                submitButton.disabled =
+                    true;
+
+                submitButton.textContent =
+                    "Creating Account...";
+
+
+                try {
+
+
+                    /* =============================================
+                       SUPABASE AUTH REGISTRATION
+                    ============================================= */
+
+                    const { data, error } =
+                        await supabaseClient.auth.signUp({
+
+                            email: email,
+
+                            password: password,
+
+                            options: {
+
+                                emailRedirectTo:
+                                    "https://cfoltech.com.ng/",
+
+                                data: {
+
+                                    first_name:
+                                        firstName,
+
+                                    last_name:
+                                        lastName,
+
+                                    phone:
+                                        phone,
+
+                                    role:
+                                        role,
+
+                                    course:
+                                        role === "student"
+                                            ? course
+                                            : null,
+
+                                    expertise:
+                                        role === "lecturer"
+                                            ? expertise
+                                            : null,
+
+                                    qualification:
+                                        role === "lecturer"
+                                            ? qualification
+                                            : null,
+
+                                    experience:
+                                        role === "lecturer"
+                                            ? Number(
+                                                experienceValue
+                                            )
+                                            : null
+
+                                }
 
                             }
 
-                        }
-
-                    });
+                        });
 
 
-                /* =============================================
-                   CHECK FOR SUPABASE ERROR
-                ============================================= */
+                    /* =============================================
+                       CHECK SUPABASE ERROR
+                    ============================================= */
 
-                if (error) {
+                    if (error) {
 
-                    throw error;
+                        console.error(
+                            "Supabase Error:",
+                            error
+                        );
 
-                }
+                        throw error;
 
-
-                /* =============================================
-                   SUCCESS MESSAGE
-                ============================================= */
-
-                if (role === "lecturer") {
-
-                    message.innerHTML =
-                        "✅ Account created successfully! " +
-                        "Please check your email to verify your account. " +
-                        "Your lecturer account will require administrator approval.";
-
-                } else {
-
-                    message.innerHTML =
-                        "✅ Account created successfully! " +
-                        "Please check your email to verify your account.";
-
-                }
+                    }
 
 
-                /* =============================================
-                   RESET FORM
-                ============================================= */
+                    /* =============================================
+                       SUCCESS MESSAGE
+                    ============================================= */
 
-                form.reset();
+                    if (
+                        role === "lecturer"
+                    ) {
+
+                        message.innerHTML =
+                            "✅ Account created successfully! " +
+                            "Please check your email to verify your account. " +
+                            "Your lecturer account will require administrator approval.";
+
+                    }
+
+                    else {
+
+                        message.innerHTML =
+                            "✅ Account created successfully! " +
+                            "Please check your email to verify your account.";
+
+                    }
 
 
-                roleInput.value =
-                    "student";
+                    message.style.color =
+                        "#198754";
 
 
-                if (studentFields) {
+                    /* =============================================
+                       RESET FORM
+                    ============================================= */
+
+                    form.reset();
+
+
+                    roleInput.value =
+                        "student";
+
 
                     studentFields.style.display =
                         "block";
 
-                }
-
-
-                if (lecturerFields) {
 
                     lecturerFields.style.display =
                         "none";
 
+
+                    /*
+                     * Restore Student button.
+                     */
+
+                    roleButtons.forEach(
+                        function (btn) {
+
+                            btn.classList.remove(
+                                "active"
+                            );
+
+                        }
+                    );
+
+
+                    if (roleButtons[0]) {
+
+                        roleButtons[0]
+                            .classList.add(
+                                "active"
+                            );
+
+                    }
+
+
+                    /*
+                     * Restore required state.
+                     */
+
+                    document.getElementById(
+                        "course"
+                    ).required = true;
+
+
+                    document.getElementById(
+                        "expertise"
+                    ).required = false;
+
+
+                    document.getElementById(
+                        "qualification"
+                    ).required = false;
+
+
+                    document.getElementById(
+                        "experience"
+                    ).required = false;
+
+
                 }
 
 
-                roleButtons.forEach(function (btn) {
-
-                    btn.classList.remove("active");
-
-                });
-
-
-                if (roleButtons[0]) {
-
-                    roleButtons[0]
-                        .classList.add("active");
-
-                }
-
-
-            } catch (error) {
-
-
-                /* =============================================
+                /* =================================================
                    ERROR HANDLING
-                ============================================= */
+                ================================================= */
 
-                console.error(
-                    "CFOL Registration Error:",
-                    error
-                );
+                catch (error) {
 
-
-                message.textContent =
-                    error.message ||
-                    "Registration failed. Please try again.";
-
-            } finally {
+                    console.error(
+                        "CFOL Registration Error:",
+                        error
+                    );
 
 
-                /* =============================================
-                   ENABLE BUTTON AGAIN
-                ============================================= */
-
-                submitButton.disabled =
-                    false;
+                    message.textContent =
+                        error.message ||
+                        "Registration failed. Please try again.";
 
 
-                submitButton.textContent =
-                    "Create Account";
+                    message.style.color =
+                        "#dc3545";
+
+                }
+
+
+                /* =================================================
+                   ENABLE BUTTON
+                ================================================= */
+
+                finally {
+
+                    submitButton.disabled =
+                        false;
+
+                    submitButton.textContent =
+                        "Create Account";
+
+                }
 
             }
+        );
+
+
+        /* =====================================================
+           INITIAL FORM STATE
+        ===================================================== */
+
+        if (roleInput.value === "student") {
+
+            studentFields.style.display =
+                "block";
+
+            lecturerFields.style.display =
+                "none";
+
+            document.getElementById(
+                "course"
+            ).required = true;
 
         }
-    );
 
-});
+    }
+);

@@ -8,7 +8,7 @@
    GLOBAL
 ========================================================= */
 
-:root {
+: root {
     --primary: #003366;
     --primary-light: #0d3b73;
     --secondary: #ffc72c;
@@ -1136,4 +1136,284 @@ footer p {
         font-size: 15px;
     }
 
+}
+
+/* =========================================================
+   CFOL REGISTRATION FORM - FINAL FIX
+========================================================= */
+
+.register-section {
+    background: #f5f7fa !important;
+    padding: 90px 20px !important;
+    width: 100%;
+}
+
+.register-container {
+    width: 100%;
+    max-width: 700px !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+    padding: 45px !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12) !important;
+}
+
+
+/* =========================================================
+   REGISTRATION HEADER
+========================================================= */
+
+.register-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.register-badge {
+    display: inline-block;
+    background: rgba(0, 51, 102, 0.08);
+    color: #003366;
+    padding: 7px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.register-header h2 {
+    color: #003366 !important;
+    font-size: 2.4rem !important;
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+    margin-top: 15px !important;
+    margin-bottom: 12px !important;
+}
+
+.register-header p {
+    color: #555555;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   STUDENT / LECTURER BUTTONS
+========================================================= */
+
+.account-type {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 15px !important;
+    margin-bottom: 30px !important;
+}
+
+.account-type-btn {
+    width: 100%;
+    padding: 14px 15px !important;
+    border: 2px solid #e5e7eb !important;
+    background: #ffffff !important;
+    border-radius: 10px !important;
+    color: #003366 !important;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.account-type-btn:hover {
+    border-color: #003366 !important;
+    background: #f5f7fa !important;
+}
+
+.account-type-btn.active {
+    background: #003366 !important;
+    color: #ffffff !important;
+    border-color: #003366 !important;
+}
+
+
+/* =========================================================
+   FORM ROW
+========================================================= */
+
+.form-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+    width: 100%;
+}
+
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block !important;
+    width: 100%;
+    margin-bottom: 7px !important;
+    color: #222222 !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.form-group input,
+.form-group select {
+    display: block !important;
+    width: 100% !important;
+    min-height: 48px;
+    padding: 12px 14px !important;
+    border: 1px solid #d9dee5 !important;
+    border-radius: 8px !important;
+    background: #ffffff !important;
+    color: #222222 !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 14px !important;
+    outline: none !important;
+    transition: all 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: #999999;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #003366 !important;
+    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.10) !important;
+}
+
+
+/* =========================================================
+   STUDENT / LECTURER CONDITIONAL FIELDS
+========================================================= */
+
+#studentFields,
+#lecturerFields {
+    width: 100%;
+}
+
+
+/* =========================================================
+   CREATE ACCOUNT BUTTON
+========================================================= */
+
+.register-submit {
+    display: block !important;
+    width: 100% !important;
+    min-height: 50px;
+    margin-top: 10px !important;
+    padding: 13px 20px !important;
+    border-radius: 10px !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    text-align: center;
+}
+
+.register-submit:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   REGISTRATION MESSAGE
+========================================================= */
+
+.registration-message {
+    width: 100%;
+    min-height: 24px;
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .register-section {
+        padding: 60px 15px !important;
+    }
+
+    .register-container {
+        max-width: 100% !important;
+        padding: 30px 20px !important;
+        border-radius: 15px !important;
+    }
+
+    .register-header h2 {
+        font-size: 2rem !important;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+    }
+
+    .account-type {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
+    .account-type-btn {
+        font-size: 14px;
+        padding: 13px 8px !important;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .register-section {
+        padding: 50px 10px !important;
+    }
+
+    .register-container {
+        padding: 25px 16px !important;
+    }
+
+    .register-header h2 {
+        font-size: 1.7rem !important;
+    }
+
+    .register-header p {
+        font-size: 14px;
+    }
+
+    .account-type {
+        grid-template-columns: 1fr !important;
+    }
+
+    .account-type-btn {
+        width: 100%;
+    }
+
+    .form-group input,
+    .form-group select {
+        min-height: 46px;
+        font-size: 14px !important;
+    }
+
+    .register-submit {
+        font-size: 15px !important;
+    }
 }

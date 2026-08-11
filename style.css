@@ -1,14 +1,15 @@
 /* =========================================================
    CFOL TECHNOLOGIES
    COMPLETE RESPONSIVE CSS
+   CLEAN / BOOTSTRAP SAFE VERSION
 ========================================================= */
 
 
 /* =========================================================
-   GLOBAL
+   GLOBAL VARIABLES
 ========================================================= */
 
-: root {
+:root {
     --primary: #003366;
     --primary-light: #0d3b73;
     --secondary: #ffc72c;
@@ -20,9 +21,12 @@
     --shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
 }
 
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -48,17 +52,11 @@ a {
     text-decoration: none;
 }
 
-button {
+button,
+input,
+select,
+textarea {
     font-family: "Poppins", sans-serif;
-}
-
-
-/* =========================================================
-   BOOTSTRAP CONTAINER ADJUSTMENT
-========================================================= */
-
-.container {
-    width: 100%;
 }
 
 
@@ -70,48 +68,55 @@ button {
     background: var(--primary);
     min-height: 72px;
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
     z-index: 1050;
 }
 
-.navbar-brand {
+.cfol-navbar .navbar-brand {
     font-size: 1.5rem;
     font-weight: 700;
     letter-spacing: 1px;
+    color: var(--white);
 }
 
-.navbar-brand span {
+.cfol-navbar .navbar-brand span {
     color: var(--secondary);
 }
 
-.navbar-nav {
+.cfol-navbar .navbar-nav {
     gap: 5px;
 }
 
-.navbar-nav .nav-link {
+.cfol-navbar .navbar-nav .nav-link {
     color: var(--white) !important;
     font-weight: 500;
     padding: 10px 14px !important;
     transition: 0.3s ease;
 }
 
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link:focus {
+.cfol-navbar .navbar-nav .nav-link:hover,
+.cfol-navbar .navbar-nav .nav-link:focus {
     color: var(--secondary) !important;
 }
 
-.navbar-toggler {
+.cfol-navbar .navbar-toggler {
     border: 1px solid rgba(255, 255, 255, 0.55);
     padding: 7px 10px;
 }
 
-.navbar-toggler:focus {
+.cfol-navbar .navbar-toggler:focus {
     box-shadow: none;
 }
 
-.navbar-toggler-icon {
+.cfol-navbar .navbar-toggler-icon {
     width: 1.6em;
     height: 1.6em;
 }
+
+
+/* =========================================================
+   CFOL BUTTON
+========================================================= */
 
 .btn-cfol {
     background: var(--secondary);
@@ -221,7 +226,7 @@ button {
 }
 
 .hero-mini-cards small {
-    color: white;
+    color: var(--white);
 }
 
 
@@ -253,6 +258,7 @@ section h2 {
 
 /* =========================================================
    ABOUT CARDS
+   IMPORTANT: SCOPED TO .cards
 ========================================================= */
 
 .cards {
@@ -262,31 +268,32 @@ section h2 {
     margin-top: 40px;
 }
 
-.card {
+.cards .card {
     border: none;
     padding: 30px;
     background: var(--light);
     border-radius: 15px;
     box-shadow: var(--shadow);
     transition: 0.3s ease;
+    min-width: 0;
 }
 
-.card:hover {
+.cards .card:hover {
     transform: translateY(-7px);
 }
 
-.card h3 {
+.cards .card h3 {
     color: var(--primary);
     margin-bottom: 15px;
 }
 
-.card p {
+.cards .card p {
     color: var(--text);
 }
 
 
 /* =========================================================
-   COURSES
+   COURSE SECTION
 ========================================================= */
 
 #courses {
@@ -302,7 +309,7 @@ section h2 {
 
 .course {
     padding: 30px;
-    background: white;
+    background: #ffffff;
     border-radius: 15px;
     box-shadow: var(--shadow);
     transition: 0.3s ease;
@@ -336,7 +343,7 @@ section h2 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 20px;
     padding: 55px 8%;
-    background: white;
+    background: #ffffff;
     text-align: center;
 }
 
@@ -352,7 +359,7 @@ section h2 {
 }
 
 .stat-box p {
-    color: #666;
+    color: #666666;
     margin: 0;
 }
 
@@ -363,11 +370,11 @@ section h2 {
 
 .why {
     background: var(--primary-light);
-    color: white;
+    color: #ffffff;
 }
 
 .why h2 {
-    color: white;
+    color: #ffffff;
     text-align: center;
     margin-bottom: 50px;
 }
@@ -379,13 +386,12 @@ section h2 {
 }
 
 .feature-card {
-    background: white;
+    background: #ffffff;
     color: var(--dark);
     border-radius: 18px;
     padding: 30px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
-    cursor: pointer;
     min-width: 0;
 }
 
@@ -409,7 +415,7 @@ section h2 {
 
 .feature-card button {
     background: var(--primary-light);
-    color: white;
+    color: #ffffff;
     border: none;
     padding: 11px 20px;
     border-radius: 8px;
@@ -429,7 +435,7 @@ section h2 {
 
 #contact {
     text-align: center;
-    background: white;
+    background: #ffffff;
 }
 
 #contact p {
@@ -440,7 +446,7 @@ section h2 {
 #messageBtn {
     padding: 13px 25px;
     background: var(--primary);
-    color: white;
+    color: #ffffff;
     border: none;
     cursor: pointer;
     border-radius: 8px;
@@ -457,8 +463,8 @@ section h2 {
 ========================================================= */
 
 footer {
-    background: #111;
-    color: white;
+    background: #111111;
+    color: #ffffff;
     text-align: center;
     padding: 25px 15px;
 }
@@ -469,46 +475,292 @@ footer p {
 
 
 /* =========================================================
+   =========================================================
+   REGISTRATION PAGE
+   =========================================================
+   ========================================================= */
+
+
+/* =========================================================
+   REGISTRATION SECTION
+========================================================= */
+
+.register-section {
+    width: 100%;
+    background: var(--light);
+    padding: 80px 20px;
+}
+
+
+/* =========================================================
+   REGISTRATION CONTAINER
+========================================================= */
+
+.register-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+}
+
+
+/* =========================================================
+   REGISTRATION HEADER
+========================================================= */
+
+.register-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.register-badge {
+    display: inline-block;
+    background: rgba(0, 51, 102, 0.08);
+    color: var(--primary);
+    padding: 7px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.register-header h2 {
+    color: var(--primary);
+    font-size: 2.4rem;
+    line-height: 1.2;
+    font-weight: 700;
+    margin-top: 15px;
+    margin-bottom: 12px;
+}
+
+.register-header p {
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+/* =========================================================
+   STUDENT / LECTURER ACCOUNT TYPE
+========================================================= */
+
+.register-container .account-type {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.register-container .account-type-btn {
+    display: block;
+    width: 100%;
+    min-height: 50px;
+    padding: 13px 15px;
+    border: 2px solid var(--border);
+    background: #ffffff;
+    border-radius: 10px;
+    color: var(--primary);
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.register-container .account-type-btn:hover {
+    border-color: var(--primary);
+    background: #f5f7fa;
+}
+
+.register-container .account-type-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+.register-container .account-type-btn.active:hover {
+    background: var(--primary-light);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   REGISTRATION FORM
+========================================================= */
+
+.register-container .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+}
+
+.register-container .form-group {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.register-container .form-group label {
+    display: block;
+    width: 100%;
+    margin-bottom: 7px;
+    color: #222222;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   REGISTRATION INPUTS
+========================================================= */
+
+.register-container .form-group input,
+.register-container .form-group select,
+.register-container .form-group textarea {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #d9dee5;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #222222;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.register-container .form-group input::placeholder {
+    color: #999999;
+    opacity: 1;
+}
+
+.register-container .form-group input:focus,
+.register-container .form-group select:focus,
+.register-container .form-group textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.10);
+}
+
+
+/* =========================================================
+   CONDITIONAL FIELDS
+========================================================= */
+
+#studentFields,
+#lecturerFields {
+    width: 100%;
+}
+
+
+/* =========================================================
+   REGISTRATION SUBMIT BUTTON
+========================================================= */
+
+.register-submit {
+    display: block;
+    width: 100%;
+    min-height: 50px;
+    margin-top: 10px;
+    padding: 13px 20px;
+    border: 2px solid var(--secondary);
+    border-radius: 30px;
+    background: var(--secondary);
+    color: var(--primary);
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.register-submit:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+.register-submit:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   REGISTRATION MESSAGE
+========================================================= */
+
+.registration-message {
+    width: 100%;
+    min-height: 24px;
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   REGISTRATION ERROR / SUCCESS STATES
+========================================================= */
+
+.registration-message.success {
+    color: #198754;
+    background: rgba(25, 135, 84, 0.08);
+    border-radius: 8px;
+}
+
+.registration-message.error {
+    color: #dc3545;
+    background: rgba(220, 53, 69, 0.08);
+    border-radius: 8px;
+}
+
+
+/* =========================================================
    TABLET
-   992px AND BELOW
 ========================================================= */
 
 @media (max-width: 991.98px) {
 
-    /* -----------------------------------------
-       MOBILE / TABLET NAVIGATION
-    ----------------------------------------- */
-
-    .navbar-collapse {
+    .cfol-navbar .navbar-collapse {
         background: var(--primary);
         padding: 15px 0 25px;
     }
 
-    .navbar-nav {
+    .cfol-navbar .navbar-nav {
         padding: 10px 0;
         text-align: center;
         align-items: stretch !important;
     }
 
-    .navbar-nav .nav-link {
+    .cfol-navbar .navbar-nav .nav-link {
         color: #ffffff !important;
         padding: 12px 15px !important;
     }
 
-    .navbar-nav .nav-link:hover,
-    .navbar-nav .nav-link:focus {
+    .cfol-navbar .navbar-nav .nav-link:hover,
+    .cfol-navbar .navbar-nav .nav-link:focus {
         color: var(--secondary) !important;
     }
 
-    .navbar-nav .btn-cfol {
+    .cfol-navbar .navbar-nav .btn-cfol {
         display: inline-block;
         margin: 10px auto 0;
     }
 
 
-    /* -----------------------------------------
-       HERO
-    ----------------------------------------- */
+    /* Hero */
 
     .hero-section {
         padding-top: 110px;
@@ -524,36 +776,28 @@ footer p {
     }
 
 
-    /* -----------------------------------------
-       ABOUT
-    ----------------------------------------- */
+    /* About */
 
     .cards {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
 
-    /* -----------------------------------------
-       COURSES
-    ----------------------------------------- */
+    /* Courses */
 
     .course-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
 
-    /* -----------------------------------------
-       WHY CHOOSE US
-    ----------------------------------------- */
+    /* Features */
 
     .features {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
 
-    /* -----------------------------------------
-       STATS
-    ----------------------------------------- */
+    /* Stats */
 
     .stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -563,7 +807,6 @@ footer p {
 
 /* =========================================================
    MOBILE
-   768px AND BELOW
 ========================================================= */
 
 @media (max-width: 767.98px) {
@@ -582,53 +825,39 @@ footer p {
     }
 
 
-    /* -----------------------------------------
-       CONTAINER
-    ----------------------------------------- */
-
-    .container {
-        width: 100%;
-        max-width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-
-    /* -----------------------------------------
-       NAVBAR
-    ----------------------------------------- */
+    /* Navbar */
 
     .cfol-navbar {
         min-height: 64px;
     }
 
-    .navbar-brand {
+    .cfol-navbar .navbar-brand {
         font-size: 1.3rem;
     }
 
-    .navbar-collapse {
+    .cfol-navbar .navbar-collapse {
         background: var(--primary);
         padding: 15px 0 25px;
     }
 
-    .navbar-nav {
+    .cfol-navbar .navbar-nav {
         width: 100%;
         text-align: center;
         padding: 10px 0;
     }
 
-    .navbar-nav .nav-item {
+    .cfol-navbar .navbar-nav .nav-item {
         width: 100%;
     }
 
-    .navbar-nav .nav-link {
+    .cfol-navbar .navbar-nav .nav-link {
         display: block;
         width: 100%;
         padding: 12px 15px !important;
         font-size: 1rem;
     }
 
-    .navbar-nav .btn-cfol {
+    .cfol-navbar .navbar-nav .btn-cfol {
         display: block;
         width: 90%;
         max-width: 350px;
@@ -636,9 +865,7 @@ footer p {
     }
 
 
-    /* -----------------------------------------
-       HERO
-    ----------------------------------------- */
+    /* Hero */
 
     .hero-section {
         padding-top: 95px;
@@ -701,9 +928,7 @@ footer p {
     }
 
 
-    /* -----------------------------------------
-       SECTION HEADINGS
-    ----------------------------------------- */
+    /* Section headings */
 
     section h2 {
         font-size: 2rem;
@@ -712,9 +937,7 @@ footer p {
     }
 
 
-    /* -----------------------------------------
-       STATS
-    ----------------------------------------- */
+    /* Stats */
 
     .stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -736,9 +959,7 @@ footer p {
     }
 
 
-    /* -----------------------------------------
-       ABOUT CARDS
-    ----------------------------------------- */
+    /* About cards */
 
     .cards {
         grid-template-columns: 1fr;
@@ -746,15 +967,13 @@ footer p {
         margin-top: 30px;
     }
 
-    .card {
+    .cards .card {
         width: 100%;
         padding: 25px 20px;
     }
 
 
-    /* -----------------------------------------
-       COURSE CARDS
-    ----------------------------------------- */
+    /* Course cards */
 
     .course-grid {
         grid-template-columns: 1fr;
@@ -773,14 +992,11 @@ footer p {
 
     .course p {
         font-size: 0.95rem;
-        word-break: normal;
         overflow-wrap: break-word;
     }
 
 
-    /* -----------------------------------------
-       WHY CHOOSE US
-    ----------------------------------------- */
+    /* Why */
 
     .why {
         padding: 60px 0;
@@ -815,9 +1031,7 @@ footer p {
     }
 
 
-    /* -----------------------------------------
-       CONTACT
-    ----------------------------------------- */
+    /* Contact */
 
     #contact {
         text-align: center;
@@ -829,37 +1043,68 @@ footer p {
     }
 
 
-    /* -----------------------------------------
-       FOOTER
-    ----------------------------------------- */
+    /* Footer */
 
     footer {
         padding: 25px 15px;
         font-size: 0.85rem;
+    }
+
+
+    /* =====================================================
+       REGISTRATION MOBILE
+    ===================================================== */
+
+    .register-section {
+        padding: 60px 15px;
+    }
+
+    .register-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
+
+    .register-header h2 {
+        font-size: 2rem;
+    }
+
+    .register-container .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .register-container .account-type {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .register-container .account-type-btn {
+        font-size: 14px;
+        padding: 13px 8px;
     }
 }
 
 
 /* =========================================================
    SMALL PHONES
-   480px AND BELOW
 ========================================================= */
 
 @media (max-width: 480px) {
 
-    .container {
-        padding-left: 15px;
-        padding-right: 15px;
+    section {
+        padding: 50px 0;
     }
 
 
     /* Navbar */
 
-    .navbar-brand {
+    .cfol-navbar .navbar-brand {
         font-size: 1.2rem;
     }
 
-    .navbar-toggler {
+    .cfol-navbar .navbar-toggler {
         padding: 6px 9px;
     }
 
@@ -886,10 +1131,6 @@ footer p {
 
     /* Sections */
 
-    section {
-        padding: 50px 0;
-    }
-
     section h2 {
         font-size: 1.7rem;
     }
@@ -912,508 +1153,49 @@ footer p {
 
     /* Cards */
 
-    .card,
+    .cards .card,
     .course,
     .feature-card {
         padding: 22px 18px;
     }
-}
-
-/* =========================================================
-   REGISTRATION
-========================================================= */
-
-.register-section {
-    background: var(--light);
-    padding: 80px 0;
-}
-
-.register-container {
-    max-width: 700px;
-    margin: 0 auto;
-    background: #ffffff;
-    padding: 45px;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-}
-
-.register-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.register-badge {
-    display: inline-block;
-    background: rgba(0, 51, 102, 0.08);
-    color: var(--primary);
-    padding: 7px 15px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.register-header h2 {
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
-
-.register-header p {
-    color: var(--text);
-}
 
 
-/* Account type */
-
-.account-type {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.account-type-btn {
-    padding: 15px;
-    border: 2px solid var(--border);
-    background: white;
-    border-radius: 10px;
-    color: var(--primary);
-    font-weight: 600;
-    cursor: pointer;
-    transition: .3s;
-}
-
-.account-type-btn.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
-
-
-/* Form */
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 7px;
-    color: var(--dark);
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 13px 15px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    outline: none;
-    font-family: inherit;
-    font-size: 15px;
-    background: white;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(0, 51, 102, .08);
-}
-
-.register-submit {
-    width: 100%;
-    margin-top: 10px;
-    padding: 14px;
-    border-radius: 8px;
-}
-
-.registration-message {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 14px;
-}
-
-
-/* Mobile */
-
-@media (max-width: 767.98px) {
+    /* =====================================================
+       REGISTRATION SMALL PHONE
+    ===================================================== */
 
     .register-section {
-        padding: 55px 0;
+        padding: 50px 10px;
     }
 
     .register-container {
-        padding: 30px 20px;
-        border-radius: 15px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-
-    .account-type {
-        grid-template-columns: 1fr;
-    }
-
-}
-/* =========================================================
-   REGISTRATION FORM STATES
-========================================================= */
-
-/* Active account type */
-.account-type-btn.active {
-    background: var(--primary);
-    color: var(--white);
-    border-color: var(--primary);
-}
-
-/* Hover */
-.account-type-btn:hover {
-    border-color: var(--primary);
-    background: rgba(0, 51, 102, 0.05);
-}
-
-.account-type-btn.active:hover {
-    background: var(--primary-light);
-    color: var(--white);
-}
-
-
-/* Submit button while processing */
-.register-submit:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-
-/* Registration messages */
-.registration-message {
-    min-height: 24px;
-    margin-top: 20px;
-    padding: 10px;
-    border-radius: 8px;
-    line-height: 1.6;
-}
-
-
-/* Better input appearance */
-.form-group input,
-.form-group select {
-    transition: border-color 0.2s ease,
-                box-shadow 0.2s ease;
-}
-
-
-/* Mobile registration improvements */
-@media (max-width: 575.98px) {
-
-    .register-container {
-        width: calc(100% - 10px);
-        padding: 25px 18px;
-    }
-
-    .account-type-btn {
-        padding: 13px 10px;
-        font-size: 14px;
-    }
-
-    .form-group input,
-    .form-group select {
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .register-submit {
-        padding: 13px;
-        font-size: 15px;
-    }
-
-}
-
-/* =========================================================
-   CFOL REGISTRATION FORM - FINAL FIX
-========================================================= */
-
-.register-section {
-    background: #f5f7fa !important;
-    padding: 90px 20px !important;
-    width: 100%;
-}
-
-.register-container {
-    width: 100%;
-    max-width: 700px !important;
-    margin: 0 auto !important;
-    background: #ffffff !important;
-    padding: 45px !important;
-    border-radius: 20px !important;
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12) !important;
-}
-
-
-/* =========================================================
-   REGISTRATION HEADER
-========================================================= */
-
-.register-header {
-    text-align: center;
-    margin-bottom: 35px;
-}
-
-.register-badge {
-    display: inline-block;
-    background: rgba(0, 51, 102, 0.08);
-    color: #003366;
-    padding: 7px 16px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-.register-header h2 {
-    color: #003366 !important;
-    font-size: 2.4rem !important;
-    line-height: 1.2 !important;
-    font-weight: 700 !important;
-    margin-top: 15px !important;
-    margin-bottom: 12px !important;
-}
-
-.register-header p {
-    color: #555555;
-    font-size: 15px;
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   STUDENT / LECTURER BUTTONS
-========================================================= */
-
-.account-type {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 15px !important;
-    margin-bottom: 30px !important;
-}
-
-.account-type-btn {
-    width: 100%;
-    padding: 14px 15px !important;
-    border: 2px solid #e5e7eb !important;
-    background: #ffffff !important;
-    border-radius: 10px !important;
-    color: #003366 !important;
-    font-family: "Poppins", sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.account-type-btn:hover {
-    border-color: #003366 !important;
-    background: #f5f7fa !important;
-}
-
-.account-type-btn.active {
-    background: #003366 !important;
-    color: #ffffff !important;
-    border-color: #003366 !important;
-}
-
-
-/* =========================================================
-   FORM ROW
-========================================================= */
-
-.form-row {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 20px !important;
-    width: 100%;
-}
-
-
-/* =========================================================
-   FORM GROUP
-========================================================= */
-
-.form-group {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block !important;
-    width: 100%;
-    margin-bottom: 7px !important;
-    color: #222222 !important;
-    font-size: 14px !important;
-    font-weight: 600 !important;
-}
-
-
-/* =========================================================
-   INPUTS
-========================================================= */
-
-.form-group input,
-.form-group select {
-    display: block !important;
-    width: 100% !important;
-    min-height: 48px;
-    padding: 12px 14px !important;
-    border: 1px solid #d9dee5 !important;
-    border-radius: 8px !important;
-    background: #ffffff !important;
-    color: #222222 !important;
-    font-family: "Poppins", sans-serif !important;
-    font-size: 14px !important;
-    outline: none !important;
-    transition: all 0.2s ease;
-}
-
-.form-group input::placeholder {
-    color: #999999;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    border-color: #003366 !important;
-    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.10) !important;
-}
-
-
-/* =========================================================
-   STUDENT / LECTURER CONDITIONAL FIELDS
-========================================================= */
-
-#studentFields,
-#lecturerFields {
-    width: 100%;
-}
-
-
-/* =========================================================
-   CREATE ACCOUNT BUTTON
-========================================================= */
-
-.register-submit {
-    display: block !important;
-    width: 100% !important;
-    min-height: 50px;
-    margin-top: 10px !important;
-    padding: 13px 20px !important;
-    border-radius: 10px !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    text-align: center;
-}
-
-.register-submit:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-}
-
-
-/* =========================================================
-   REGISTRATION MESSAGE
-========================================================= */
-
-.registration-message {
-    width: 100%;
-    min-height: 24px;
-    margin-top: 20px;
-    padding: 10px;
-    text-align: center;
-    font-size: 14px;
-    line-height: 1.6;
-}
-
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media (max-width: 767.98px) {
-
-    .register-section {
-        padding: 60px 15px !important;
-    }
-
-    .register-container {
-        max-width: 100% !important;
-        padding: 30px 20px !important;
-        border-radius: 15px !important;
+        padding: 25px 16px;
     }
 
     .register-header h2 {
-        font-size: 2rem !important;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr !important;
-        gap: 0 !important;
-    }
-
-    .account-type {
-        grid-template-columns: 1fr 1fr !important;
-        gap: 10px !important;
-    }
-
-    .account-type-btn {
-        font-size: 14px;
-        padding: 13px 8px !important;
-    }
-}
-
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
-
-@media (max-width: 480px) {
-
-    .register-section {
-        padding: 50px 10px !important;
-    }
-
-    .register-container {
-        padding: 25px 16px !important;
-    }
-
-    .register-header h2 {
-        font-size: 1.7rem !important;
+        font-size: 1.7rem;
     }
 
     .register-header p {
         font-size: 14px;
     }
 
-    .account-type {
-        grid-template-columns: 1fr !important;
+    .register-container .account-type {
+        grid-template-columns: 1fr;
     }
 
-    .account-type-btn {
+    .register-container .account-type-btn {
         width: 100%;
     }
 
-    .form-group input,
-    .form-group select {
+    .register-container .form-group input,
+    .register-container .form-group select,
+    .register-container .form-group textarea {
         min-height: 46px;
-        font-size: 14px !important;
+        font-size: 14px;
     }
 
     .register-submit {
-        font-size: 15px !important;
+        font-size: 15px;
     }
 }

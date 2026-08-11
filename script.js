@@ -1,4 +1,10 @@
 /* =========================================================
+   CFOL TECHNOLOGIES
+   COMPLETE JAVASCRIPT
+========================================================= */
+
+
+/* =========================================================
    SUPABASE CONFIGURATION
 ========================================================= */
 
@@ -217,7 +223,10 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("registrationForm");
 
 
-    /* Registration section may not exist yet */
+    /*
+       Registration section may not exist
+       on the homepage.
+    */
 
     if (!form) {
         return;
@@ -257,6 +266,11 @@ document.addEventListener("DOMContentLoaded", function () {
             function () {
 
 
+                /*
+                   Remove active class
+                   from all buttons
+                */
+
                 roleButtons.forEach(function (btn) {
 
                     btn.classList.remove("active");
@@ -264,8 +278,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
 
+                /*
+                   Activate selected button
+                */
+
                 this.classList.add("active");
 
+
+                /*
+                   Get selected role
+                */
 
                 const role =
                     this.dataset.role;
@@ -275,22 +297,34 @@ document.addEventListener("DOMContentLoaded", function () {
                     role;
 
 
+                /*
+                   Show appropriate fields
+                */
+
                 if (role === "student") {
 
-                    studentFields.style.display =
-                        "block";
+                    if (studentFields) {
+                        studentFields.style.display =
+                            "block";
+                    }
 
-                    lecturerFields.style.display =
-                        "none";
+                    if (lecturerFields) {
+                        lecturerFields.style.display =
+                            "none";
+                    }
 
 
                 } else {
 
-                    studentFields.style.display =
-                        "none";
+                    if (studentFields) {
+                        studentFields.style.display =
+                            "none";
+                    }
 
-                    lecturerFields.style.display =
-                        "block";
+                    if (lecturerFields) {
+                        lecturerFields.style.display =
+                            "block";
+                    }
 
                 }
 
@@ -311,8 +345,16 @@ document.addEventListener("DOMContentLoaded", function () {
             event.preventDefault();
 
 
+            /*
+               Clear previous message
+            */
+
             message.textContent = "";
 
+
+            /* =================================================
+               COMMON FIELDS
+            ================================================= */
 
             const firstName =
                 document.getElementById("firstName")
@@ -349,6 +391,71 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             /* =================================================
+               STUDENT COURSE
+            ================================================= */
+
+            const courseElement =
+                document.getElementById("course");
+
+
+            const course =
+                courseElement
+                    ? courseElement.value.trim()
+                    : "";
+
+
+            /* =================================================
+               LECTURER INFORMATION
+            ================================================= */
+
+            const expertiseElement =
+                document.getElementById("expertise");
+
+
+            const qualificationElement =
+                document.getElementById("qualification");
+
+
+            const experienceElement =
+                document.getElementById("experience");
+
+
+            const expertise =
+                expertiseElement
+                    ? expertiseElement.value.trim()
+                    : "";
+
+
+            const qualification =
+                qualificationElement
+                    ? qualificationElement.value.trim()
+                    : "";
+
+
+            const experience =
+                experienceElement
+                    ? experienceElement.value.trim()
+                    : "";
+
+
+            /* =================================================
+               BASIC VALIDATION
+            ================================================= */
+
+            if (!firstName ||
+                !lastName ||
+                !email ||
+                !phone) {
+
+                message.textContent =
+                    "Please complete all required fields.";
+
+                return;
+
+            }
+
+
+            /* =================================================
                PASSWORD VALIDATION
             ================================================= */
 
@@ -368,6 +475,40 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Passwords do not match.";
 
                 return;
+
+            }
+
+
+            /* =================================================
+               STUDENT VALIDATION
+            ================================================= */
+
+            if (role === "student" && !course) {
+
+                message.textContent =
+                    "Please select your course.";
+
+                return;
+
+            }
+
+
+            /* =================================================
+               LECTURER VALIDATION
+            ================================================= */
+
+            if (role === "lecturer") {
+
+                if (!expertise ||
+                    !qualification ||
+                    !experience) {
+
+                    message.textContent =
+                        "Please complete your expertise, qualification and experience.";
+
+                    return;
+
+                }
 
             }
 
@@ -403,6 +544,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                             data: {
 
+                                /*
+                                   COMMON INFORMATION
+                                */
+
                                 first_name:
                                     firstName,
 
@@ -413,7 +558,37 @@ document.addEventListener("DOMContentLoaded", function () {
                                     phone,
 
                                 role:
-                                    role
+                                    role,
+
+
+                                /*
+                                   STUDENT INFORMATION
+                                */
+
+                                course:
+                                    role === "student"
+                                        ? course
+                                        : null,
+
+
+                                /*
+                                   LECTURER INFORMATION
+                                */
+
+                                expertise:
+                                    role === "lecturer"
+                                        ? expertise
+                                        : null,
+
+                                qualification:
+                                    role === "lecturer"
+                                        ? qualification
+                                        : null,
+
+                                experience:
+                                    role === "lecturer"
+                                        ? experience
+                                        : null
 
                             }
 
@@ -421,6 +596,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     });
 
+
+                /* =============================================
+                   CHECK FOR SUPABASE ERROR
+                ============================================= */
 
                 if (error) {
 
@@ -439,7 +618,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         "✅ Account created successfully! " +
                         "Please check your email to verify your account. " +
                         "Your lecturer account will require administrator approval.";
-
 
                 } else {
 
@@ -461,12 +639,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     "student";
 
 
-                studentFields.style.display =
-                    "block";
+                if (studentFields) {
+
+                    studentFields.style.display =
+                        "block";
+
+                }
 
 
-                lecturerFields.style.display =
-                    "none";
+                if (lecturerFields) {
+
+                    lecturerFields.style.display =
+                        "none";
+
+                }
 
 
                 roleButtons.forEach(function (btn) {
@@ -487,6 +673,10 @@ document.addEventListener("DOMContentLoaded", function () {
             } catch (error) {
 
 
+                /* =============================================
+                   ERROR HANDLING
+                ============================================= */
+
                 console.error(
                     "CFOL Registration Error:",
                     error
@@ -497,9 +687,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     error.message ||
                     "Registration failed. Please try again.";
 
-
             } finally {
 
+
+                /* =============================================
+                   ENABLE BUTTON AGAIN
+                ============================================= */
 
                 submitButton.disabled =
                     false;

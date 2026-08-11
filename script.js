@@ -1,138 +1,340 @@
-// Smooth scrolling
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-
-anchor.addEventListener('click',function(e){
-
-e.preventDefault();
-
-document.querySelector(this.getAttribute('href'))
-
-.scrollIntoView({
-
-behavior:'smooth'
-
-});
-
-});
-
-});
-
-
-
-// Welcome message
-
-window.addEventListener("load",()=>{
-
-console.log("Welcome to CFOL Technologies");
-
-});
-
-
-
-// Contact button
-
-document.getElementById("messageBtn")
-
-.addEventListener("click",()=>{
-
-alert(
-
-"Thank you for your interest in CFOL Technologies.\n\nRegistration portal will be available soon."
-
-);
-
-});
-
-
-
-// Reveal animation
-
-const cards=document.querySelectorAll('.card,.course');
-
-window.addEventListener('scroll',()=>{
-
-cards.forEach(card=>{
-
-const top=card.getBoundingClientRect().top;
-
-if(top<window.innerHeight-100){
-
-card.style.opacity=1;
-
-card.style.transform='translateY(0)';
-
-}
-
-});
-
-});
-
-cards.forEach(card=>{
-
-card.style.opacity=0;
-
-card.style.transform='translateY(40px)';
-
-card.style.transition='all .6s ease';
-
-});
+/* =========================================================
+   CFOL REGISTRATION
+========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const navbar = document.getElementById("mainNavbar");
-    const navLinks = document.querySelectorAll("#mainNavbar .nav-link, #mainNavbar .btn-cfol");
+    const form = document.getElementById("registrationForm");
 
-    navLinks.forEach(function (link) {
+    if (!form) {
+        return;
+    }
 
-        link.addEventListener("click", function (event) {
+    const roleInput =
+        document.getElementById("userRole");
 
-            const targetId = this.getAttribute("href");
+    const studentFields =
+        document.getElementById("studentFields");
 
-            if (!targetId || !targetId.startsWith("#")) {
-                return;
-            }
+    const lecturerFields =
+        document.getElementById("lecturerFields");
 
-            const targetSection = document.querySelector(targetId);
+    const message =
+        document.getElementById("registrationMessage");
 
-            if (!targetSection) {
-                return;
-            }
+    const submitButton =
+        document.getElementById("registerSubmit");
 
-            event.preventDefault();
+    const roleButtons =
+        document.querySelectorAll(".account-type-btn");
 
-            // Check if mobile menu is currently open
-            const isMobile = window.innerWidth < 992;
-            const isMenuOpen = navbar.classList.contains("show");
 
-            if (isMobile && isMenuOpen) {
+    /* =====================================================
+       STUDENT / LECTURER SELECTION
+    ===================================================== */
 
-                // Close Bootstrap mobile menu
-                const bsCollapse = bootstrap.Collapse.getOrCreateInstance(navbar);
+    roleButtons.forEach(function (button) {
 
-                bsCollapse.hide();
+        button.addEventListener("click", function () {
 
-                // Wait for menu to close before scrolling
-                setTimeout(function () {
+            roleButtons.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
 
-                    targetSection.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
+            this.classList.add("active");
 
-                }, 300);
+            const role = this.dataset.role;
+
+            roleInput.value = role;
+
+            if (role === "student") {
+
+                studentFields.style.display = "block";
+                lecturerFields.style.display = "none";
 
             } else {
 
-                // Desktop
-                targetSection.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
+                studentFields.style.display = "none";
+                lecturerFields.style.display = "block";
 
             }
 
         });
+
+    });
+
+
+    /* =====================================================
+       REGISTRATION SUBMISSION
+    ===================================================== */
+
+    form.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        message.textContent = "";
+
+        /* ---------------------------------------------
+           COMMON FIELDS
+        --------------------------------------------- */
+
+        const firstName =
+            document.getElementById("firstName").value.trim();
+
+        const lastName =
+            document.getElementById("lastName").value.trim();
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const phone =
+            document.getElementById("phone").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+
+        const role =
+            roleInput.value;
+
+
+        /* ---------------------------------------------
+           STUDENT FIELD
+        --------------------------------------------- */
+
+        const courseElement =
+            document.getElementById("course");
+
+        const course =
+            courseElement
+                ? courseElement.value.trim()
+                : "";
+
+
+        /* ---------------------------------------------
+           LECTURER FIELDS
+        --------------------------------------------- */
+
+        const expertiseElement =
+            document.getElementById("expertise");
+
+        const qualificationElement =
+            document.getElementById("qualification");
+
+        const experienceElement =
+            document.getElementById("experience");
+
+
+        const expertise =
+            expertiseElement
+                ? expertiseElement.value.trim()
+                : "";
+
+        const qualification =
+            qualificationElement
+                ? qualificationElement.value.trim()
+                : "";
+
+        const experience =
+            experienceElement
+                ? experienceElement.value.trim()
+                : "";
+
+
+        /* =================================================
+           VALIDATION
+        ================================================= */
+
+        if (!firstName ||
+            !lastName ||
+            !email ||
+            !phone) {
+
+            message.textContent =
+                "Please complete all required fields.";
+
+            return;
+        }
+
+
+        if (password.length < 8) {
+
+            message.textContent =
+                "Password must contain at least 8 characters.";
+
+            return;
+        }
+
+
+        if (password !== confirmPassword) {
+
+            message.textContent =
+                "Passwords do not match.";
+
+            return;
+        }
+
+
+        /* =================================================
+           ROLE-SPECIFIC VALIDATION
+        ================================================= */
+
+        if (role === "student" && !course) {
+
+            message.textContent =
+                "Please select your course.";
+
+            return;
+        }
+
+
+        if (role === "lecturer") {
+
+            if (!expertise ||
+                !qualification ||
+                !experience) {
+
+                message.textContent =
+                    "Please complete your expertise, qualification and experience.";
+
+                return;
+            }
+
+        }
+
+
+        /* =================================================
+           DISABLE BUTTON
+        ================================================= */
+
+        submitButton.disabled = true;
+
+        submitButton.textContent =
+            "Creating Account...";
+
+
+        try {
+
+            /* =================================================
+               CREATE SUPABASE AUTH ACCOUNT
+            ================================================= */
+
+            const { data, error } =
+                await supabaseClient.auth.signUp({
+
+                    email: email,
+
+                    password: password,
+
+                    options: {
+
+                        emailRedirectTo:
+                            "https://cfoltech.com.ng/",
+
+                        data: {
+
+                            first_name: firstName,
+
+                            last_name: lastName,
+
+                            phone: phone,
+
+                            role: role,
+
+                            course:
+                                role === "student"
+                                    ? course
+                                    : null,
+
+                            expertise:
+                                role === "lecturer"
+                                    ? expertise
+                                    : null,
+
+                            qualification:
+                                role === "lecturer"
+                                    ? qualification
+                                    : null,
+
+                            experience:
+                                role === "lecturer"
+                                    ? experience
+                                    : null
+
+                        }
+
+                    }
+
+                });
+
+
+            if (error) {
+                throw error;
+            }
+
+
+            /* =================================================
+               SUCCESS MESSAGE
+            ================================================= */
+
+            if (role === "lecturer") {
+
+                message.innerHTML =
+                    "✅ Account created successfully! " +
+                    "Please check your email to verify your account. " +
+                    "Your lecturer account will require administrator approval.";
+
+            } else {
+
+                message.innerHTML =
+                    "✅ Account created successfully! " +
+                    "Please check your email to verify your account.";
+
+            }
+
+
+            /* =================================================
+               RESET FORM
+            ================================================= */
+
+            form.reset();
+
+            roleInput.value = "student";
+
+            studentFields.style.display = "block";
+
+            lecturerFields.style.display = "none";
+
+            roleButtons.forEach(function (btn) {
+                btn.classList.remove("active");
+            });
+
+            if (roleButtons[0]) {
+                roleButtons[0].classList.add("active");
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "CFOL Registration Error:",
+                error
+            );
+
+            message.textContent =
+                error.message ||
+                "Registration failed. Please try again.";
+
+        } finally {
+
+            submitButton.disabled = false;
+
+            submitButton.textContent =
+                "Create Account";
+
+        }
 
     });
 

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CFOL Technologies | Admin Login</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(
+                135deg,
+                #003366,
+                #0d3b73
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .login-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            margin: 0;
+            color: #003366;
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo h1 span {
+            color: #ffc72c;
+        }
+
+        .logo p {
+            margin-top: 8px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .admin-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #222;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #d9dee5;
+            border-radius: 8px;
+            outline: none;
+            font-family: inherit;
+            font-size: 15px;
+        }
+
+        .form-group input:focus {
+            border-color: #003366;
+            box-shadow:
+                0 0 0 3px rgba(0, 51, 102, 0.10);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #003366;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #0d3b73;
+        }
+
+        .login-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
+
+        .message.error {
+            display: block;
+            background: #ffecec;
+            color: #b00020;
+        }
+
+        .message.success {
+            display: block;
+            background: #ecfdf3;
+            color: #087443;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            color: #003366;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 480px) {
+
+            .login-card {
+                padding: 30px 20px;
+            }
+
+            .logo h1 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <div class="logo">
+
+            <div class="admin-icon">
+                🔐
+            </div>
+
+            <h1>
+                CFOL<span>TECH</span>
+            </h1>
+
+            <p>
+                Administrator Portal
+            </p>
+
+        </div>
+
+
+        <form id="adminLoginForm">
+
+            <div class="form-group">
+
+                <label for="adminEmail">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="adminEmail"
+                    placeholder="Enter administrator email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="adminPassword">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Enter password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginButton">
+
+                Login to Dashboard
+
+            </button>
+
+
+            <div
+                id="loginMessage"
+                class="message">
+            </div>
+
+        </form>
+
+
+        <a
+            href="../index.html"
+            class="back-link">
+
+            ← Back to CFOL Technologies
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+    /* =====================================================
+       SUPABASE CONFIGURATION
+    ===================================================== */
+
+    const SUPABASE_URL =
+        "https://bimulzqxdsurkdpbdpex.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_-l2aR3__r2j-nOak99QUBg_LGYXKIQV";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
+
+
+    /* =====================================================
+       ADMIN LOGIN
+    ===================================================== */
+
+    const loginForm =
+        document.getElementById("adminLoginForm");
+
+    const loginButton =
+        document.getElementById("loginButton");
+
+    const loginMessage =
+        document.getElementById("loginMessage");
+
+
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
+
+            event.preventDefault();
+
+            loginMessage.style.display = "none";
+            loginMessage.textContent = "";
+
+            const email =
+                document
+                    .getElementById("adminEmail")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("adminPassword")
+                    .value;
+
+
+            loginButton.disabled = true;
+
+            loginButton.textContent =
+                "Checking credentials...";
+
+
+            try {
+
+                /* =========================================
+                   SIGN IN
+                ========================================= */
+
+                const { data, error } =
+                    await supabaseClient.auth.signInWithPassword({
+
+                        email: email,
+
+                        password: password
+
+                    });
+
+
+                if (error) {
+                    throw error;
+                }
+
+
+                const user =
+                    data.user;
+
+
+                if (!user) {
+
+                    throw new Error(
+                        "Unable to identify the authenticated user."
+                    );
+
+                }
+
+
+                /* =========================================
+                   CHECK USER PROFILE
+                ========================================= */
+
+                loginButton.textContent =
+                    "Checking administrator access...";
+
+
+                const { data: profile, error: profileError } =
+                    await supabaseClient
+                        .from("profiles")
+                        .select("id, first_name, last_name, role, status")
+                        .eq("id", user.id)
+                        .single();
+
+
+                if (profileError) {
+
+                    console.error(
+                        "Profile Error:",
+                        profileError
+                    );
+
+                    await supabaseClient.auth.signOut();
+
+                    throw new Error(
+                        "Administrator profile could not be verified."
+                    );
+
+                }
+
+
+                /* =========================================
+                   CHECK ADMIN ROLE
+                ========================================= */
+
+                if (profile.role !== "admin") {
+
+                    await supabaseClient.auth.signOut();
+
+                    throw new Error(
+                        "Access denied. This account is not an administrator."
+                    );
+
+                }
+
+
+                /* =========================================
+                   CHECK ADMIN STATUS
+                ========================================= */
+
+                if (profile.status !== "active") {
+
+                    await supabaseClient.auth.signOut();
+
+                    throw new Error(
+                        "Administrator account is not active."
+                    );
+
+                }
+
+
+                /* =========================================
+                   SUCCESS
+                ========================================= */
+
+                loginMessage.className =
+                    "message success";
+
+                loginMessage.textContent =
+                    "Administrator verified. Redirecting...";
+
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "dashboard.html";
+
+                }, 800);
+
+
+            } catch (error) {
+
+                console.error(
+                    "Admin Login Error:",
+                    error
+                );
+
+
+                loginMessage.className =
+                    "message error";
+
+                loginMessage.textContent =
+                    error.message ||
+                    "Login failed. Please try again.";
+
+
+            } finally {
+
+                loginButton.disabled = false;
+
+                loginButton.textContent =
+                    "Login to Dashboard";
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
